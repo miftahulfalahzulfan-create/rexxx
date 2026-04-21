@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Fan Store - Top Up Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🎮 Fan Store</h1>
+  <p>Top Up Game Murah & Cepat</p>
+</header>
+
+<div class="container">
+  <h2>Top Up Sekarang</h2>
+
+  <select id="game">
+    <option value="ml">Mobile Legends</option>
+    <option value="ff">Free Fire</option>
+    <option value="pubg">Pubg Mobile</option>
+  </select>
+
+  <input type="text" id="userId" placeholder="Masukkan ID Game">
+
+  <select id="nominal">
+    <option value="86">86 Diamond</option>
+    <option value="172">172 Diamond</option>
+    <option value="50">50 Diamond</option>
+    <option value="1.000">1.000 Diamond</option>
+  </select>
+
+  <button onclick="topUp()">Top Up</button>
+
+  <p id="status"></p>
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
