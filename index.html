@@ -2,28 +2,31 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zulfan Sultan Portfolio</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<title>Top Up Game</title>
 </head>
 <body>
-<div id="particles"></div>
-<nav><h2>Zulfan</h2></nav>
-<header>
-<h1>Hi, I'm Zulfan 👋</h1>
-<p id="typing"></p>
-</header>
-<section data-aos="fade-up">
-<h2>Project</h2>
-<div class="card">Top Up Website</div>
-</section>
-<footer>© 2026 Zulfan</footer>
+<h2>Top Up Game</h2>
+<input id="userId" placeholder="User ID"><br>
+<input id="nominal" placeholder="Nominal"><br>
+<button onclick="topup()">Bayar</button>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="script.js"></script>
+<script>
+async function topup(){
+  const userId=document.getElementById('userId').value;
+  const nominal=document.getElementById('nominal').value;
+
+  const res=await fetch('/api/payment',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({userId,nominal})
+  });
+
+  const data=await res.json();
+  localStorage.setItem('order_id', data.transaction_details?.order_id);
+
+  const qr=data.actions?.find(a=>a.name==='generate-qr-code');
+  if(qr){ window.location='status.html?qr='+encodeURIComponent(qr.url);}
+}
+</script>
 </body>
 </html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>

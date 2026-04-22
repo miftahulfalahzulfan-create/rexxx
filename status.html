@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#0f172a;color:white;text-align:center">
+<h2>Scan QRIS</h2>
+<img id="qr" width="250">
+<p id="status">Menunggu pembayaran...</p>
+
+<script>
+const qr=new URLSearchParams(location.search).get('qr');
+document.getElementById('qr').src=qr;
+
+setInterval(async()=>{
+  const order_id=localStorage.getItem('order_id');
+  const res=await fetch('/api/status?order_id='+order_id);
+  const data=await res.json();
+  document.getElementById('status').innerText=data.transaction_status;
+},5000);
+</script>
+</body>
+</html>
